@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - FoodShare Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .auth-container {
+            max-width: 500px;
+            margin: 80px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .auth-container h1 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .form-group .password-requirements {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .form-actions {
+            margin-top: 30px;
+        }
+        
+        .form-actions button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .form-actions button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .login-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .login-link a:hover {
+            color: #0056b3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .error-message {
+            color: #d9534f;
+            background-color: #f9eaea;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">FoodShare</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="login.html" class="btn-small">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="auth-container">
+                <h1>Create an Account</h1>
+                <div id="error-message" class="error-message"></div>
+                
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number (Optional)</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                        <div class="password-requirements">
+                            Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="user-type">I am a:</label>
+                        <select id="user-type" name="userType" required>
+                            <option value="donor">Donor</option>
+                            <option value="recipient">Recipient</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit">Create Account</button>
+                    </div>
+                    
+                    <div class="login-link">
+                        Already have an account? <a href="login.html">Login here</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('register-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const userType = document.getElementById('user-type').value;
+            
+            // Validate password
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!passwordRegex.test(password)) {
+                showError('Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.');
+                return;
+            }
+            
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                showError('Passwords do not match.');
+                return;
+            }
+            
+            try {
+                // Send registration data to server
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        phone,
+                        password,
+                        userType
+                    })
+                });
+                
+                if (response.ok) {
+                    // Registration successful
+                    const data = await response.json();
+                    alert('Registration successful! Please log in.');
+                    window.location.href = 'login.html';
+                } else {
+                    // Registration failed
+                    try {
+                        const data = await response.json();
+                        if (response.status === 400) {
+                            showError(data.message || 'Invalid input or email already registered.');
+                        } else if (response.status === 404) {
+                            showError('Registration endpoint not found. Please restart the server.');
+                        } else if (response.status >= 500) {
+                            showError(data.message || 'Server error. Please try again later.');
+                        } else {
+                            showError(data.message || 'Registration failed. Please try again.');
+                        }
+                    } catch (parseError) {
+                        // Fallback to text for non-JSON responses (e.g., HTML error pages)
+                        try {
+                            const text = await response.text();
+                            console.error('Registration failed response (text):', text);
+                            if (text.includes('Cannot POST')) {
+                                showError('Registration endpoint not found. Please restart the server.');
+                            } else {
+                                showError('Registration failed. Please try again.');
+                            }
+                        } catch (textError) {
+                            showError('Registration failed. Please try again.');
+                        }
+                    }
+                }
+            } catch (error) {
+                showError('An error occurred. Please try again later.');
+                console.error('Registration error:', error);
+            }
+        });
+        
+        function showError(message) {
+            const errorElement = document.getElementById('error-message');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

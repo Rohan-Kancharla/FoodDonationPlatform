@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Food - FoodShare</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #loginStatus {
+            margin-right: 10px;
+        }
+        .login-required {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px auto;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-utensils"></i> FoodShare</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="donate.html" class="active">Donate</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <span id="loginStatus">Not logged in</span>
+                <a href="login.html" id="loginBtn" class="btn btn-small">Login</a>
+                <a href="register.html" id="registerBtn" class="btn btn-small">Register</a>
+                <button id="logoutBtn" class="btn btn-small" style="display: none;">Logout</button>
+            </div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h2>Donate Food</h2>
+            <p>Help us fight hunger by donating surplus food</p>
+        </div>
+    </section>
+
+    <section class="donation-options">
+        <div class="container">
+            <h2 class="section-title">How You Can Help</h2>
+            <div class="options">
+                <div class="option">
+                    <div class="option-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>Business Donations</h3>
+                    <p>Restaurants, grocery stores, and food producers can donate surplus food that would otherwise go to waste.</p>
+                    <a href="#business-form" class="btn btn-secondary donation-btn">Donate as Business</a>
+                </div>
+                <div class="option">
+                    <div class="option-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>Individual Donations</h3>
+                    <p>Individuals can donate non-perishable food items, organize food drives, or contribute financially.</p>
+                    <a href="#individual-form" class="btn btn-secondary donation-btn">Donate as Individual</a>
+                </div>
+                <div class="option">
+                    <div class="option-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Financial Support</h3>
+                    <p>Your monetary donations help us maintain our platform, coordinate pickups, and expand our reach.</p>
+                    <a href="#financial-form" class="btn btn-secondary donation-btn">Donate Money</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="loginRequired" class="login-required" style="display: none;">
+        <h3><i class="fas fa-lock"></i> Login Required</h3>
+        <p>You need to be logged in to make a donation. This helps us track donations and provide you with updates.</p>
+        <div>
+            <a href="login.html" class="btn">Login</a>
+            <a href="register.html" class="btn btn-secondary">Register</a>
+        </div>
+    </div>
+
+    <section id="business-form" class="donation-form hidden">
+        <div class="container">
+            <h2 class="section-title">Business Donation Form</h2>
+            <form id="businessDonationForm">
+                <div class="form-group">
+                    <label for="businessName">Business Name</label>
+                    <input type="text" id="businessName" name="businessName" required>
+                </div>
+                <div class="form-group">
+                    <label for="businessType">Business Type</label>
+                    <select id="businessType" name="businessType" required>
+                        <option value="">Select Business Type</option>
+                        <option value="restaurant">Restaurant</option>
+                        <option value="grocery">Grocery Store</option>
+                        <option value="bakery">Bakery</option>
+                        <option value="caterer">Caterer</option>
+                        <option value="producer">Food Producer</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="contactName">Contact Person</label>
+                    <input type="text" id="contactName" name="contactName" required>
+                </div>
+                <div class="form-group">
+                    <label for="businessEmail">Email</label>
+                    <input type="email" id="businessEmail" name="businessEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="businessPhone">Phone</label>
+                    <input type="tel" id="businessPhone" name="businessPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="businessAddress">Address</label>
+                    <textarea id="businessAddress" name="businessAddress" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="foodType">Food Type</label>
+                    <select id="foodType" name="foodType" required>
+                        <option value="">Select Food Type</option>
+                        <option value="prepared">Prepared Meals</option>
+                        <option value="produce">Fresh Produce</option>
+                        <option value="bakery">Bakery Items</option>
+                        <option value="dairy">Dairy Products</option>
+                        <option value="meat">Meat/Protein</option>
+                        <option value="canned">Canned/Packaged Goods</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="foodQuantity">Approximate Quantity</label>
+                    <input type="text" id="foodQuantity" name="foodQuantity" placeholder="e.g., 20 meals, 15 lbs of produce" required>
+                </div>
+                <div class="form-group">
+                    <label for="pickupDate">Preferred Pickup Date</label>
+                    <input type="date" id="pickupDate" name="pickupDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="pickupTime">Preferred Pickup Time</label>
+                    <input type="time" id="pickupTime" name="pickupTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="businessNotes">Additional Notes</label>
+                    <textarea id="businessNotes" name="businessNotes"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit Donation</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section id="individual-form" class="donation-form hidden">
+        <div class="container">
+            <h2 class="section-title">Individual Donation Form</h2>
+            <form id="individualDonationForm">
+                <div class="form-group">
+                    <label for="individualName">Full Name</label>
+                    <input type="text" id="individualName" name="individualName" required>
+                </div>
+                <div class="form-group">
+                    <label for="individualEmail">Email</label>
+                    <input type="email" id="individualEmail" name="individualEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="individualPhone">Phone</label>
+                    <input type="tel" id="individualPhone" name="individualPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="individualAddress">Address</label>
+                    <textarea id="individualAddress" name="individualAddress" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="donationType">Donation Type</label>
+                    <select id="donationType" name="donationType" required>
+                        <option value="">Select Donation Type</option>
+                        <option value="nonperishable">Non-Perishable Food Items</option>
+                        <option value="fresh">Fresh Food Items</option>
+                        <option value="fooddrive">Organizing a Food Drive</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="individualFoodDescription">Description of Items</label>
+                    <textarea id="individualFoodDescription" name="individualFoodDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="individualPickupDate">Preferred Pickup Date</label>
+                    <input type="date" id="individualPickupDate" name="individualPickupDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="individualPickupTime">Preferred Pickup Time</label>
+                    <input type="time" id="individualPickupTime" name="individualPickupTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="individualNotes">Additional Notes</label>
+                    <textarea id="individualNotes" name="individualNotes"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit Donation</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section id="financial-form" class="donation-form hidden">
+        <div class="container">
+            <h2 class="section-title">Financial Donation</h2>
+            <form id="financialDonationForm">
+                <div class="form-group">
+                    <label for="donorName">Full Name</label>
+                    <input type="text" id="donorName" name="donorName" required>
+                </div>
+                <div class="form-group">
+                    <label for="donorEmail">Email</label>
+                    <input type="email" id="donorEmail" name="donorEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="donorPhone">Phone</label>
+                    <input type="tel" id="donorPhone" name="donorPhone">
+                </div>
+                <div class="form-group">
+                    <label for="donationAmount">Donation Amount ($)</label>
+                    <input type="number" id="donationAmount" name="donationAmount" min="1" step="1" required>
+                </div>
+                <div class="form-group">
+                    <label>Donation Frequency</label>
+                    <div class="radio-group">
+                        <input type="radio" id="oneTime" name="donationFrequency" value="oneTime" checked>
+                        <label for="oneTime">One-time</label>
+                        <input type="radio" id="monthly" name="donationFrequency" value="monthly">
+                        <label for="monthly">Monthly</label>
+                        <input type="radio" id="quarterly" name="donationFrequency" value="quarterly">
+                        <label for="quarterly">Quarterly</label>
+                        <input type="radio" id="annually" name="donationFrequency" value="annually">
+                        <label for="annually">Annually</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <div class="payment-methods">
+                        <div class="payment-method">
+                            <input type="radio" id="creditCard" name="paymentMethod" value="creditCard" checked>
+                            <label for="creditCard"><i class="far fa-credit-card"></i> Credit Card</label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" id="paypal" name="paymentMethod" value="paypal">
+                            <label for="paypal"><i class="fab fa-paypal"></i> PayPal</label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" id="bankTransfer" name="paymentMethod" value="bankTransfer">
+                            <label for="bankTransfer"><i class="fas fa-university"></i> Bank Transfer</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Credit Card Details (would be replaced with a secure payment processor in production) -->
+                <div id="creditCardDetails" class="payment-details">
+                    <div class="form-group">
+                        <label for="cardName">Name on Card</label>
+                        <input type="text" id="cardName" name="cardName">
+                    </div>
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" name="cardNumber" placeholder="XXXX XXXX XXXX XXXX">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="expiryDate">Expiry Date</label>
+                            <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY">
+                        </div>
+                        <div class="form-group half">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" name="cvv" placeholder="XXX">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="comments">Comments (Optional)</label>
+                    <textarea id="comments" name="comments"></textarea>
+                </div>
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="anonymous" name="anonymous">
+                    <label for="anonymous">Make my donation anonymous</label>
+                </div>
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="newsletter" name="newsletter" checked>
+                    <label for="newsletter">Subscribe to newsletter</label>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Donate Now</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What types of food can I donate?</h3>
+                        <span class="toggle-icon"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept a wide variety of food donations including prepared meals, fresh produce, bakery items, dairy products, meat/protein, and canned/packaged goods. All food must be safe for consumption and meet basic food safety standards.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How is the food distributed?</h3>
+                        <span class="toggle-icon"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Food donations are distributed to local food banks, shelters, community kitchens, and other organizations that serve people experiencing food insecurity. Our platform connects donors directly with recipient organizations to ensure efficient distribution.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is my donation tax-deductible?</h3>
+                        <span class="toggle-icon"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, all donations (both food and financial) are tax-deductible. We provide donation receipts for tax purposes. For food donations, we can provide documentation of the estimated value of donated items.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I know my donation is making an impact?</h3>
+                        <span class="toggle-icon"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We track all donations and their impact. Donors receive updates on how their contributions have helped the community. We also publish regular impact reports on our website and social media channels.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Authentication and session management
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginStatus = document.getElementById('loginStatus');
+            const loginBtn = document.getElementById('loginBtn');
+            const registerBtn = document.getElementById('registerBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const donationForms = document.querySelectorAll('.donation-form');
+            const donationButtons = document.querySelectorAll('.donation-btn');
+            const loginRequired = document.getElementById('loginRequired');
+            
+            // Check if user is logged in
+            function checkLoginStatus() {
+                const token = localStorage.getItem('authToken');
+                const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+                
+                if (token && userData.name) {
+                    // User is logged in
+                    loginStatus.textContent = `Welcome, ${userData.name}`;
+                    loginBtn.style.display = 'none';
+                    registerBtn.style.display = 'none';
+                    logoutBtn.style.display = 'inline-block';
+                    
+                    // Show donation forms
+                    donationForms.forEach(form => {
+                        form.classList.remove('hidden');
+                    });
+                    
+                    // Hide login required message
+                    loginRequired.style.display = 'none';
+                    
+                    return true;
+                } else {
+                    // User is not logged in
+                    loginStatus.textContent = 'Not logged in';
+                    loginBtn.style.display = 'inline-block';
+                    registerBtn.style.display = 'inline-block';
+                    logoutBtn.style.display = 'none';
+                    
+                    // Hide donation forms
+                    donationForms.forEach(form => {
+                        form.classList.add('hidden');
+                    });
+                    
+                    return false;
+                }
+            }
+            
+            // Handle donation button clicks
+            donationButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    if (!checkLoginStatus()) {
+                        e.preventDefault();
+                        loginRequired.style.display = 'block';
+                        
+                        // Scroll to login required message
+                        loginRequired.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        e.preventDefault();
+                        // Hide all forms first
+                        donationForms.forEach(form => {
+                            form.classList.add('hidden');
+                        });
+                        
+                        // Show only the targeted form
+                        const targetFormId = this.getAttribute('href');
+                        document.querySelector(targetFormId).classList.remove('hidden');
+                        
+                        // Scroll to the form
+                        document.querySelector(targetFormId).scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+            
+            // Handle logout
+            logoutBtn.addEventListener('click', function() {
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userData');
+                checkLoginStatus();
+                window.location.href = 'index.html';
+            });
+            
+            // Initial check
+            checkLoginStatus();
+        });
+        
+        // Form submission handlers
+        document.addEventListener('DOMContentLoaded', function() {
+            const businessForm = document.getElementById('businessDonationForm');
+            const individualForm = document.getElementById('individualDonationForm');
+            const financialForm = document.getElementById('financialDonationForm');
+            
+            if (businessForm) {
+                businessForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const token = localStorage.getItem('authToken');
+                    if (!token) {
+                        alert('Please log in to submit a donation');
+                        return;
+                    }
+                    
+                    // Add authorization header to fetch request
+                    const formData = new FormData(businessForm);
+                    const data = Object.fromEntries(formData.entries());
+                    data.donationType = 'business';
+                    data.name = data.businessName;
+                    
+                    fetch('/api/donate', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            alert('Donation submitted successfully!');
+                            businessForm.reset();
+                        } else {
+                            alert('Error: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred. Please try again.');
+                    });
+                });
+            }
+            
+            // Similar handlers for other forms
+            if (individualForm) {
+                individualForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const token = localStorage.getItem('authToken');
+                    if (!token) {
+                        alert('Please log in to submit a donation');
+                        return;
+                    }
+                    
+                    const formData = new FormData(individualForm);
+                    const data = Object.fromEntries(formData.entries());
+                    data.donationType = 'individual';
+                    data.name = data.individualName;
+                    
+                    fetch('/api/donate', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            alert('Donation submitted successfully!');
+                            individualForm.reset();
+                        } else {
+                            alert('Error: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred. Please try again.');
+                    });
+                });
+            }
+            
+            if (financialForm) {
+                financialForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const token = localStorage.getItem('authToken');
+                    if (!token) {
+                        alert('Please log in to submit a donation');
+                        return;
+                    }
+                    
+                    const formData = new FormData(financialForm);
+                    const data = Object.fromEntries(formData.entries());
+                    data.donationType = 'financial';
+                    
+                    fetch('/api/donate', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            alert('Donation submitted successfully!');
+                            financialForm.reset();
+                        } else {
+                            alert('Error: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred. Please try again.');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
