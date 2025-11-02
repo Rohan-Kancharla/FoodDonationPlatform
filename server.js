@@ -423,8 +423,12 @@ app.post('/api/donate', authenticateToken, (req, res) => {
   }
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Access the website at http://localhost:${PORT}`);
-});
+// Export for serverless (Vercel) and start locally when executed directly
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log(`Access the website at http://localhost:${PORT}`);
+  });
+} else {
+  module.exports = app;
+}
