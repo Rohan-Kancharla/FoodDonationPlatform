@@ -1,0 +1,4 @@
+id,donationType,name,email,phone,address,foodType,quantity,pickupDate,pickupTime,notes,timestamp
+1687452369123,"business","ABC Restaurant","contact@abcrestaurant.com","555-123-4567","123 Main St, City, State","prepared","5 trays","2023-06-22","14:00","Fresh prepared meals","2023-06-22T10:12:49.123Z"
+1687538769456,"individual","John Doe","john@example.com","555-987-6543","456 Oak Ave, City, State","canned","10 items","2023-06-23","10:30","Non-perishable items","2023-06-23T10:12:49.456Z"
+1687625169789,"financial","Jane Smith","jane@example.com","555-456-7890","789 Pine St, City, State","","","","","Monthly donation","2023-06-24T10:12:49.789Z"
