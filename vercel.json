@@ -4,6 +4,15 @@
     { "src": "server.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "server.js" }
+    { "src": "/api/(.*)", "dest": "server.js" },
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/donate", "dest": "/donate.html" },
+    { "src": "/login", "dest": "/login.html" },
+    { "src": "/register", "dest": "/register.html" },
+    { "src": "/about", "dest": "/about.html" },
+    { "src": "/contact", "dest": "/contact.html" },
+    { "src": "/css/(.*)", "dest": "/css/$1" },
+    { "src": "/js/(.*)", "dest": "/js/$1" },
+    { "src": "/data/(.*)", "dest": "/data/$1" }
   ]
 }
