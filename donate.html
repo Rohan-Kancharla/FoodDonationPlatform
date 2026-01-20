@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +13,11 @@
             align-items: center;
             gap: 10px;
         }
+
         #loginStatus {
             margin-right: 10px;
         }
+
         .login-required {
             background-color: rgba(255, 255, 255, 0.9);
             padding: 20px;
@@ -26,6 +29,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -68,7 +72,8 @@
                         <i class="fas fa-store"></i>
                     </div>
                     <h3>Business Donations</h3>
-                    <p>Restaurants, grocery stores, and food producers can donate surplus food that would otherwise go to waste.</p>
+                    <p>Restaurants, grocery stores, and food producers can donate surplus food that would otherwise go
+                        to waste.</p>
                     <a href="#business-form" class="btn btn-secondary donation-btn">Donate as Business</a>
                 </div>
                 <div class="option">
@@ -76,7 +81,8 @@
                         <i class="fas fa-user"></i>
                     </div>
                     <h3>Individual Donations</h3>
-                    <p>Individuals can donate non-perishable food items, organize food drives, or contribute financially.</p>
+                    <p>Individuals can donate non-perishable food items, organize food drives, or contribute
+                        financially.</p>
                     <a href="#individual-form" class="btn btn-secondary donation-btn">Donate as Individual</a>
                 </div>
                 <div class="option">
@@ -84,7 +90,8 @@
                         <i class="fas fa-dollar-sign"></i>
                     </div>
                     <h3>Financial Support</h3>
-                    <p>Your monetary donations help us maintain our platform, coordinate pickups, and expand our reach.</p>
+                    <p>Your monetary donations help us maintain our platform, coordinate pickups, and expand our reach.
+                    </p>
                     <a href="#financial-form" class="btn btn-secondary donation-btn">Donate Money</a>
                 </div>
             </div>
@@ -151,7 +158,8 @@
                 </div>
                 <div class="form-group">
                     <label for="foodQuantity">Approximate Quantity</label>
-                    <input type="text" id="foodQuantity" name="foodQuantity" placeholder="e.g., 20 meals, 15 lbs of produce" required>
+                    <input type="text" id="foodQuantity" name="foodQuantity"
+                        placeholder="e.g., 20 meals, 15 lbs of produce" required>
                 </div>
                 <div class="form-group">
                     <label for="pickupDate">Preferred Pickup Date</label>
@@ -325,7 +333,9 @@
                         <span class="toggle-icon"><i class="fas fa-plus"></i></span>
                     </div>
                     <div class="faq-answer">
-                        <p>We accept a wide variety of food donations including prepared meals, fresh produce, bakery items, dairy products, meat/protein, and canned/packaged goods. All food must be safe for consumption and meet basic food safety standards.</p>
+                        <p>We accept a wide variety of food donations including prepared meals, fresh produce, bakery
+                            items, dairy products, meat/protein, and canned/packaged goods. All food must be safe for
+                            consumption and meet basic food safety standards.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -334,7 +344,9 @@
                         <span class="toggle-icon"><i class="fas fa-plus"></i></span>
                     </div>
                     <div class="faq-answer">
-                        <p>Food donations are distributed to local food banks, shelters, community kitchens, and other organizations that serve people experiencing food insecurity. Our platform connects donors directly with recipient organizations to ensure efficient distribution.</p>
+                        <p>Food donations are distributed to local food banks, shelters, community kitchens, and other
+                            organizations that serve people experiencing food insecurity. Our platform connects donors
+                            directly with recipient organizations to ensure efficient distribution.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -343,7 +355,9 @@
                         <span class="toggle-icon"><i class="fas fa-plus"></i></span>
                     </div>
                     <div class="faq-answer">
-                        <p>Yes, all donations (both food and financial) are tax-deductible. We provide donation receipts for tax purposes. For food donations, we can provide documentation of the estimated value of donated items.</p>
+                        <p>Yes, all donations (both food and financial) are tax-deductible. We provide donation receipts
+                            for tax purposes. For food donations, we can provide documentation of the estimated value of
+                            donated items.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -352,7 +366,9 @@
                         <span class="toggle-icon"><i class="fas fa-plus"></i></span>
                     </div>
                     <div class="faq-answer">
-                        <p>We track all donations and their impact. Donors receive updates on how their contributions have helped the community. We also publish regular impact reports on our website and social media channels.</p>
+                        <p>We track all donations and their impact. Donors receive updates on how their contributions
+                            have helped the community. We also publish regular impact reports on our website and social
+                            media channels.</p>
                     </div>
                 </div>
             </div>
@@ -362,7 +378,7 @@
     <script src="js/script.js"></script>
     <script>
         // Authentication and session management
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const loginStatus = document.getElementById('loginStatus');
             const loginBtn = document.getElementById('loginBtn');
             const registerBtn = document.getElementById('registerBtn');
@@ -370,27 +386,27 @@
             const donationForms = document.querySelectorAll('.donation-form');
             const donationButtons = document.querySelectorAll('.donation-btn');
             const loginRequired = document.getElementById('loginRequired');
-            
+
             // Check if user is logged in
             function checkLoginStatus() {
                 const token = localStorage.getItem('authToken');
                 const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-                
+
                 if (token && userData.name) {
                     // User is logged in
                     loginStatus.textContent = `Welcome, ${userData.name}`;
                     loginBtn.style.display = 'none';
                     registerBtn.style.display = 'none';
                     logoutBtn.style.display = 'inline-block';
-                    
+
                     // Show donation forms
                     donationForms.forEach(form => {
                         form.classList.remove('hidden');
                     });
-                    
+
                     // Hide login required message
                     loginRequired.style.display = 'none';
-                    
+
                     return true;
                 } else {
                     // User is not logged in
@@ -398,23 +414,23 @@
                     loginBtn.style.display = 'inline-block';
                     registerBtn.style.display = 'inline-block';
                     logoutBtn.style.display = 'none';
-                    
+
                     // Hide donation forms
                     donationForms.forEach(form => {
                         form.classList.add('hidden');
                     });
-                    
+
                     return false;
                 }
             }
-            
+
             // Handle donation button clicks
             donationButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
+                button.addEventListener('click', function (e) {
                     if (!checkLoginStatus()) {
                         e.preventDefault();
                         loginRequired.style.display = 'block';
-                        
+
                         // Scroll to login required message
                         loginRequired.scrollIntoView({ behavior: 'smooth' });
                     } else {
@@ -423,165 +439,139 @@
                         donationForms.forEach(form => {
                             form.classList.add('hidden');
                         });
-                        
+
                         // Show only the targeted form
                         const targetFormId = this.getAttribute('href');
                         document.querySelector(targetFormId).classList.remove('hidden');
-                        
+
                         // Scroll to the form
                         document.querySelector(targetFormId).scrollIntoView({ behavior: 'smooth' });
                     }
                 });
             });
-            
+
             // Handle logout
-            logoutBtn.addEventListener('click', function() {
+            logoutBtn.addEventListener('click', function () {
                 localStorage.removeItem('authToken');
                 localStorage.removeItem('userData');
                 checkLoginStatus();
                 window.location.href = 'index.html';
             });
-            
+
             // Initial check
             checkLoginStatus();
         });
-        
+
         // Form submission handlers
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const businessForm = document.getElementById('businessDonationForm');
             const individualForm = document.getElementById('individualDonationForm');
             const financialForm = document.getElementById('financialDonationForm');
-            
+
             if (businessForm) {
-                businessForm.addEventListener('submit', function(e) {
+                businessForm.addEventListener('submit', function (e) {
                     e.preventDefault();
                     const token = localStorage.getItem('authToken');
                     if (!token) {
                         alert('Please log in to submit a donation');
                         return;
                     }
-                    
+
                     // Add authorization header to fetch request
                     const formData = new FormData(businessForm);
                     const data = Object.fromEntries(formData.entries());
                     data.donationType = 'business';
                     data.name = data.businessName;
-                    
-                    fetch('/api/donate', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
-                        },
-                        body: JSON.stringify(data)
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data.success) {
-                            alert('Donation submitted successfully!');
-                            businessForm.reset();
-                        } else {
-                            alert('Error: ' + data.message);
-                        }
-                    })
-                    .catch(error => {
+
+                    // Simulate donation submission
+                    try {
+                        const donations = JSON.parse(localStorage.getItem('foodshare_donations') || '[]');
+                        const newDonation = {
+                            id: Date.now(),
+                            ...data,
+                            timestamp: new Date().toISOString()
+                        };
+                        donations.push(newDonation);
+                        localStorage.setItem('foodshare_donations', JSON.stringify(donations));
+
+                        alert('Donation submitted successfully! Thank you for your support.');
+                        businessForm.reset();
+                    } catch (error) {
                         console.error('Error:', error);
                         alert('An error occurred. Please try again.');
-                    });
+                    }
                 });
             }
-            
+
             // Similar handlers for other forms
             if (individualForm) {
-                individualForm.addEventListener('submit', function(e) {
+                individualForm.addEventListener('submit', function (e) {
                     e.preventDefault();
                     const token = localStorage.getItem('authToken');
                     if (!token) {
                         alert('Please log in to submit a donation');
                         return;
                     }
-                    
+
                     const formData = new FormData(individualForm);
                     const data = Object.fromEntries(formData.entries());
                     data.donationType = 'individual';
                     data.name = data.individualName;
-                    
-                    fetch('/api/donate', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
-                        },
-                        body: JSON.stringify(data)
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data.success) {
-                            alert('Donation submitted successfully!');
-                            individualForm.reset();
-                        } else {
-                            alert('Error: ' + data.message);
-                        }
-                    })
-                    .catch(error => {
+
+                    // Simulate donation submission
+                    try {
+                        const donations = JSON.parse(localStorage.getItem('foodshare_donations') || '[]');
+                        const newDonation = {
+                            id: Date.now(),
+                            ...data,
+                            timestamp: new Date().toISOString()
+                        };
+                        donations.push(newDonation);
+                        localStorage.setItem('foodshare_donations', JSON.stringify(donations));
+
+                        alert('Donation submitted successfully! Thank you for your support.');
+                        individualForm.reset();
+                    } catch (error) {
                         console.error('Error:', error);
                         alert('An error occurred. Please try again.');
-                    });
+                    }
                 });
             }
-            
+
             if (financialForm) {
-                financialForm.addEventListener('submit', function(e) {
+                financialForm.addEventListener('submit', function (e) {
                     e.preventDefault();
                     const token = localStorage.getItem('authToken');
                     if (!token) {
                         alert('Please log in to submit a donation');
                         return;
                     }
-                    
+
                     const formData = new FormData(financialForm);
                     const data = Object.fromEntries(formData.entries());
                     data.donationType = 'financial';
-                    
-                    fetch('/api/donate', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
-                        },
-                        body: JSON.stringify(data)
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data.success) {
-                            alert('Donation submitted successfully!');
-                            financialForm.reset();
-                        } else {
-                            alert('Error: ' + data.message);
-                        }
-                    })
-                    .catch(error => {
+
+                    // Simulate donation submission
+                    try {
+                        const donations = JSON.parse(localStorage.getItem('foodshare_donations') || '[]');
+                        const newDonation = {
+                            id: Date.now(),
+                            ...data,
+                            timestamp: new Date().toISOString()
+                        };
+                        donations.push(newDonation);
+                        localStorage.setItem('foodshare_donations', JSON.stringify(donations));
+
+                        alert('Donation submitted successfully! Thank you for your support.');
+                        financialForm.reset();
+                    } catch (error) {
                         console.error('Error:', error);
                         alert('An error occurred. Please try again.');
-                    });
+                    }
                 });
             }
         });
     </script>
 </body>
+
 </html>
